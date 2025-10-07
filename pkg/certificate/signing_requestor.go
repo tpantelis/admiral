@@ -143,10 +143,14 @@ func StartSigningRequestorWithOpts(syncerConfig broker.SyncerConfig, stopCh <-ch
 		},
 	}
 
+	logger.Info("****Creating broker syncer")
+
 	brokerSyncer, err := broker.NewSyncer(syncerConfig)
 	if err != nil {
 		return nil, errors.Wrap(err, "error creating broker syncer")
 	}
+
+	logger.Info("****Starting broker syncer")
 
 	if err := brokerSyncer.Start(stopCh); err != nil {
 		return nil, errors.Wrap(err, "error starting broker syncer")
